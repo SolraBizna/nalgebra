@@ -558,13 +558,11 @@ where
 {
     type Output = &'a T;
 
-    #[doc(hidden)]
     #[inline(always)]
     fn contained_by(&self, matrix: &Matrix<T, R, C, S>) -> bool {
         *self < matrix.len()
     }
 
-    #[doc(hidden)]
     #[inline(always)]
     unsafe fn get_unchecked(self, matrix: &'a Matrix<T, R, C, S>) -> Self::Output {
         let nrows = matrix.shape().0;
@@ -583,7 +581,6 @@ where
 {
     type OutputMut = &'a mut T;
 
-    #[doc(hidden)]
     #[inline(always)]
     unsafe fn get_unchecked_mut(self, matrix: &'a mut Matrix<T, R, C, S>) -> Self::OutputMut
     where
@@ -606,7 +603,6 @@ where
 {
     type Output = &'a T;
 
-    #[doc(hidden)]
     #[inline(always)]
     fn contained_by(&self, matrix: &Matrix<T, R, C, S>) -> bool {
         let (rows, cols) = self;
@@ -614,7 +610,6 @@ where
         DimRange::contained_by(rows, nrows) && DimRange::contained_by(cols, ncols)
     }
 
-    #[doc(hidden)]
     #[inline(always)]
     unsafe fn get_unchecked(self, matrix: &'a Matrix<T, R, C, S>) -> Self::Output {
         let (row, col) = self;
@@ -630,7 +625,6 @@ where
 {
     type OutputMut = &'a mut T;
 
-    #[doc(hidden)]
     #[inline(always)]
     unsafe fn get_unchecked_mut(self, matrix: &'a mut Matrix<T, R, C, S>) -> Self::OutputMut
     where
@@ -671,7 +665,6 @@ macro_rules! impl_index_pair {
         {
             type Output = MatrixSlice<'a, T, $ROut, $COut, S::RStride, S::CStride>;
 
-            #[doc(hidden)]
             #[inline(always)]
             fn contained_by(&self, matrix: &Matrix<T, $R, $C, S>) -> bool {
                 let (rows, cols) = self;
@@ -679,7 +672,6 @@ macro_rules! impl_index_pair {
                 DimRange::contained_by(rows, nrows) && DimRange::contained_by(cols, ncols)
             }
 
-            #[doc(hidden)]
             #[inline(always)]
             unsafe fn get_unchecked(self, matrix: &'a Matrix<T, $R, $C, S>) -> Self::Output {
                 use crate::base::SliceStorage;
@@ -707,7 +699,6 @@ macro_rules! impl_index_pair {
         {
             type OutputMut = MatrixSliceMut<'a, T, $ROut, $COut, S::RStride, S::CStride>;
 
-            #[doc(hidden)]
             #[inline(always)]
             unsafe fn get_unchecked_mut(self, matrix: &'a mut Matrix<T, $R, $C, S>) -> Self::OutputMut {
                 use crate::base::SliceStorageMut;
